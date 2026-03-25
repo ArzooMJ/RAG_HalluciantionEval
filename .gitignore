@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# OS / Editor files
+.DS_Store
+.vscode/
+.idea/
+
+
+# Dataset (RAW files)
+*.sgm
+*.tar.gz
+*.dtd
+*.txt
+
+# Intermediate / Raw CSV 
+finance_reuters_articles.csv
+
+# Logs / temp
+*.log
+
+# Keep these
+!finance_reuters_cleaned.csv
+!requirements.txt
+!README.md
