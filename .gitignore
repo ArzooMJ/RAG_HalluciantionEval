@@ -27,6 +27,11 @@ finance_reuters_articles.csv
 # Logs / temp
 *.log
 
+#Vector DB
+vector_store/
+*.bin
+*.pkl
+
 # Keep these
 !finance_reuters_cleaned.csv
 !requirements.txt
