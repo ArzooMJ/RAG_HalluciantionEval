@@ -29,11 +29,17 @@ finance_reuters_articles.csv
 
 #Vector DB
 vector_store/
+bm25_store/
 *.bin
 *.pkl
+
+#Eval results
+artifacts/eval/
+
+.env
 
 # Keep these
 !finance_reuters_cleaned.csv
 !requirements.txt
 !README.md
-.env.env
+

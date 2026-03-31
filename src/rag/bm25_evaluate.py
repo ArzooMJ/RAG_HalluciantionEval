@@ -1,8 +1,7 @@
 import json
-import pandas as pd
 from pathlib import Path
 
-from baseline import SimpleRAG
+from bm25_rag import BM25RAG
 from tqdm import tqdm
 
 
@@ -11,10 +10,8 @@ EVAL_DIR = ROOT_DIR / "artifacts" / "eval"
 
 
 def run_evaluation():
-    # Initialize RAG
-    rag = SimpleRAG()
-    
-    # 10 Dummy Questions based on financial news context
+    rag = BM25RAG()
+
     dummy_questions = [
         "What are the main factors affecting oil prices according to the reports?",
         "How did the stock market respond to the recent inflation data?",
@@ -27,10 +24,10 @@ def run_evaluation():
         "What are the key highlights from the recent corporate earnings reports?",
         "How is the renewable energy sector performing compared to traditional energy?"
     ]
-    
+
     results = []
-    
-    print("Running RAG pipeline on dummy questions...")
+
+    print("Running BM25 RAG pipeline on dummy questions...")
     for q in tqdm(dummy_questions):
         try:
             res = rag.query(q)
@@ -46,26 +43,25 @@ def run_evaluation():
                 "answer": "Error: " + str(e),
                 "retrieved_context": []
             })
-            
-    # Save results to a JSON file
+
     EVAL_DIR.mkdir(parents=True, exist_ok=True)
 
-    with open(EVAL_DIR / "evaluation_results.json", "w") as f:
+    with open(EVAL_DIR / "bm25_evaluation_results.json", "w") as f:
         json.dump(results, f, indent=4)
-        
-    # Also save as a Markdown table for the report
-    with open(EVAL_DIR / "evaluation_results.md", "w") as f:
-        f.write("# RAG Evaluation Results\n\n")
+
+    with open(EVAL_DIR / "bm25_evaluation_results.md", "w") as f:
+        f.write("# BM25 RAG Evaluation Results\n\n")
         f.write("| Question | Answer |\n")
         f.write("| --- | --- |\n")
         for res in results:
             clean_answer = res["answer"].replace("\n", " ")
             f.write(f"| {res['question']} | {clean_answer} |\n")
-            
+
     print(
         "Evaluation complete. Results saved to "
-        f"{EVAL_DIR / 'evaluation_results.json'} and {EVAL_DIR / 'evaluation_results.md'}"
+        f"{EVAL_DIR / 'bm25_evaluation_results.json'} and {EVAL_DIR / 'bm25_evaluation_results.md'}"
     )
+
 
 if __name__ == "__main__":
     run_evaluation()
