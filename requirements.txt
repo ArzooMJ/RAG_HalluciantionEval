@@ -1,5 +1,23 @@
+# Data & dataset prep
 pandas>=2.0.0
+numpy>=1.24.0
 beautifulsoup4>=4.12.0
+lxml>=4.9.0
 tqdm>=4.65.0
-lxml
+
+# Dense retrieval (FAISS + embeddings)
+faiss-cpu>=1.7.4
+sentence-transformers>=2.2.0
+
+# Avoid optional transformers vision imports failing (e.g. Streamlit file watcher)
+torchvision>=0.15.0
+
+# Lexical retrieval
 rank_bm25
+
+# LLM API & env
+groq>=0.4.0
+python-dotenv>=1.0.0
+
+# Streamlit UI
+streamlit>=1.28.0
