@@ -2,7 +2,7 @@ import os
 import json
 from pathlib import Path
 from typing import List, Dict, Any
-from baseline import SimpleRAG
+from src.rag.baseline import SimpleRAG
 
 class SelfRAG(SimpleRAG):
     """
