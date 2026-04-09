@@ -3,27 +3,30 @@ import streamlit as st
 from src.rag.baseline import SimpleRAG
 from src.rag.self_rag import SelfRAG
 from src.rag.bm25_rag import BM25RAG
+from src.rag.graph_rag import GraphRAG  
 
-# Init Models 
+# Init Models
 @st.cache_resource
 def load_models():
     baseline = SimpleRAG()
     self_rag = SelfRAG()
     bm25 = BM25RAG()
-    return baseline, self_rag, bm25
+    graph = GraphRAG() 
+    return baseline, self_rag, bm25, graph
 
-baseline_model, self_rag_model, bm25_model = load_models()
+
+baseline_model, self_rag_model, bm25_model, graph_model = load_models()
 
 # Page Config
 st.set_page_config(page_title="RAG Hallucination Analysis", layout="wide")
 
 st.title("📊 RAG Hallucination Analysis (Finance)")
-st.markdown("Compare **Vector RAG**, **Self-RAG**, and **BM25 RAG**")
+st.markdown("Compare **Vector RAG**, **BM25 RAG**, **Graph RAG**, and **Self-RAG**")
 
 # Sidebar
 st.sidebar.header("ℹ️ About")
 st.sidebar.write(
-    "This app compares retrieval methods and evaluates hallucination using Self-RAG verification."
+    "This app compares multiple RAG retrieval strategies and evaluates hallucination using Self-RAG verification."
 )
 
 # Input
@@ -41,13 +44,14 @@ if st.button("Run Comparison"):
             baseline_result = baseline_model.query(query)
             self_result = self_rag_model.self_rag_query(query)
             bm25_result = bm25_model.query(query)
+            graph_result = graph_model.query(query)  
 
         st.divider()
 
-        # Output (3 models)
-        col1, col2, col3 = st.columns(3)
+        # Output
+        col1, col2, col3, col4 = st.columns(4)
 
-        # Baseline
+        # Vector RAG
         with col1:
             st.markdown("## 🧠 Vector RAG")
             st.write(baseline_result["answer"])
@@ -56,7 +60,7 @@ if st.button("Run Comparison"):
                 with st.expander(f"Doc {i+1}"):
                     st.write(doc["content"])
 
-        # Self-RAG 
+        # Self RAG
         with col2:
             st.markdown("## 🔍 Self-RAG")
             st.write(self_result["answer"])
@@ -65,18 +69,27 @@ if st.button("Run Comparison"):
                 with st.expander(f"Doc {i+1}"):
                     st.write(doc["content"])
 
-        # BM25 
+        # BM25 RAG
         with col3:
             st.markdown("## 📚 BM25 RAG")
             st.write(bm25_result["answer"])
 
             for i, doc in enumerate(bm25_result["context"]):
-                with st.expander(f"Doc {i+1} | Score: {doc['score']:.2f}"):
+                with st.expander(f"Doc {i+1}"):
+                    st.write(doc["content"])
+
+        # Graph RAG
+        with col4:
+            st.markdown("## 🕸️ Graph RAG")
+            st.write(graph_result["answer"])
+
+            for i, doc in enumerate(graph_result["context"]):
+                with st.expander(f"Doc {i+1}"):
                     st.write(doc["content"])
 
         st.divider()
 
-        # Verification Metrics
+        # Self RAG Verification
         st.subheader("📌 Self-RAG Verification Metrics")
 
         m1, m2, m3, m4 = st.columns(4)
@@ -88,8 +101,7 @@ if st.button("Run Comparison"):
 
         st.divider()
 
-        # -----------------------------
-        # Hallucination Status
+        # Hallucination Analysis
         st.subheader("🚨 Hallucination Analysis")
 
         if self_result.get("is_grounded") is False:
@@ -97,14 +109,23 @@ if st.button("Run Comparison"):
         else:
             st.success("✅ Answer is grounded in retrieved documents.")
 
-        # Comparison Insight
+        st.divider()
+
+        # Comparison Insights
         st.subheader("📊 Comparison Insight")
 
-        # Retrieval impact
+        # BM25 vs Vector
         if bm25_result["answer"].strip() != baseline_result["answer"].strip():
             st.info("📌 BM25 vs Vector RAG produce different answers → retrieval method impacts results.")
 
-        # Self-RAG correction insight
+        # Graph insight
+        if graph_result["answer"].strip() != baseline_result["answer"].strip():
+            st.info("🕸️ Graph RAG produces different results (strong for entity-based queries).")
+
+        if len(graph_result["context"]) == 0:
+            st.warning("⚠️ Graph RAG retrieved no documents (likely no entities in query).")
+
+        # Self-RAG correction
         if self_result.get("is_grounded") is False:
             st.warning("⚠️ Self-RAG flagged the generated answer as unreliable.")
 
@@ -112,7 +133,7 @@ if st.button("Run Comparison"):
         if baseline_result["answer"].strip() != self_result["answer"].strip():
             st.info("🔍 Self-RAG modified the answer compared to baseline.")
 
-        # Safe behavior insight
+        # Safe behavior
         if (
             self_result.get("is_grounded") is True
             and self_result.get("is_relevant") is True
