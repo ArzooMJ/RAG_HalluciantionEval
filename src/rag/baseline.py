@@ -56,27 +56,17 @@ class SimpleRAG:
     def generate_answer(self, query, context_docs):
         context_text = "\n\n".join([doc["content"] for doc in context_docs])
         
-        prompt = f"""### Role
-You are a highly analytical Financial Research Assistant. Your task is to provide accurate, data-driven answers based strictly on the provided financial news context.
-
-### Context
+        prompt = f"""Context:
 {context_text}
 
-### User Question
-{query}
+Question: {query}
 
-### Instructions
-1. Groundedness: Answer the question using ONLY the provided context. If the context does not contain enough information to answer the question, state clearly: "Based on the provided reports, I do not have enough information to answer this question."
-2. Structure: 
-   - Use a clear, professional tone.
-   - If relevant, quantify data (dates, percentages, currency values) exactly as they appear in the text.
-
-### Answer:"""
+Answer only from the provided context. If the context does not contain enough information to answer, say: I do not have enough information."""
 
         response = self.client.chat.completions.create(
             model=self.groq_model,
             messages=[
-                {"role": "system", "content": "You are a helpful financial expert."},
+                {"role": "system", "content": "You answer questions using the context the user provides."},
                 {"role": "user", "content": prompt}
             ],
             temperature=0
