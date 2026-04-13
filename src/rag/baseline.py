@@ -56,12 +56,25 @@ class SimpleRAG:
     def generate_answer(self, query, context_docs):
         context_text = "\n\n".join([doc["content"] for doc in context_docs])
         
+<<<<<<< HEAD
         prompt = f"""Context:
 {context_text}
 
 Question: {query}
 
 Answer only from the provided context. If the context does not contain enough information to answer, say: I do not have enough information."""
+=======
+        prompt = f"""You are a financial assistant.
+
+Context:
+{context_text} 
+
+Question:
+{query}
+
+Answer the question clearly and completely.
+"""
+>>>>>>> c6331b6 (Improved baseline RAG for better comparison)
 
         response = self.client.chat.completions.create(
             model=self.groq_model,
@@ -89,7 +102,7 @@ if __name__ == "__main__":
     
     rag = SimpleRAG()
     
-    test_query = "What are the latest trends in the financial market?"
+    test_query = "What is the impact of cryptocurrency regulation?"
     try:
         result = rag.query(test_query)
         print(f"Query: {result['query']}")
