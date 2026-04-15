@@ -1,6 +1,6 @@
 # RAG Hallucination Eval
 
-This repository builds retrieval-augmented generation (RAG) over a cleaned Reuters finance corpus. It includes a **dense vector baseline** (FAISS + sentence embeddings), **BM25** lexical retrieval, and **Self-RAG** (retrieval + LLM-based relevance, grounding, and usefulness checks). A **Streamlit** app runs the three approaches on the same question and shows answers side by side, with Self-RAG verification metrics and short comparison hints.
+This repository builds retrieval-augmented generation (RAG) over a cleaned Reuters finance corpus. It includes a dense vector baseline (FAISS + sentence embeddings), BM25 lexical retrieval, Self-RAG (retrieval + LLM-based relevance, grounding, and usefulness checks), and Graph RAG (structured knowledge graph-based retrieval capturing entity relationships and multi-hop reasoning). A Streamlit app runs all approaches on the same question and shows answers side by side, with Self-RAG verification metrics and short comparison hints.
 
 ## Directory structure
 
