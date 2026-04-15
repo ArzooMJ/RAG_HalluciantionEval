@@ -1,0 +1,75 @@
+{
+    "summary": {
+        "total_questions": 8,
+        "grounded_rate": 0.875,
+        "relevance_rate": 0.75,
+        "usefulness_rate": 0.5,
+        "hallucination_rate": 0.125
+    },
+    "results": [
+        {
+            "question": "What did IBM report about earnings?",
+            "answer": "According to the article, IBM earned 4.8 billion dollars on revenues of 51.3 billion dollars last year.",
+            "grounded": true,
+            "relevant": true,
+            "useful": true,
+            "retrieved_docs": 5
+        },
+        {
+            "question": "What were the financial results of Swire Pacific Ltd?",
+            "answer": "According to the article, analysts estimated that Swire Pacific Ltd's 1986 operating profits will be between 1.525 billion and 1.8 billion dollars, reflecting a more than 20% rise from 1985. The company is also expected to have an extraordinary gain of about 1.38 billion dollars from the flotation of its Cathay Pacific Airways Ltd unit last May.",
+            "grounded": true,
+            "relevant": true,
+            "useful": true,
+            "retrieved_docs": 5
+        },
+        {
+            "question": "How did LYPHOMED INC perform?",
+            "answer": "LYPHOMED INC performed well in the third quarter. Their net income was 18 cents per share, which is an increase from 13 cents per share in the same period last year. Their net income also increased to $5,436,000 from $3,888,000. Additionally, their sales increased to $43.9 million from $31.5 million.",
+            "grounded": true,
+            "relevant": true,
+            "useful": true,
+            "retrieved_docs": 5
+        },
+        {
+            "question": "Which companies reported strong earnings?",
+            "answer": "Based on the provided context, the following companies reported strong earnings:\n\n1. Carlton Communications Plc - They started the current financial year well, with accounts for the first four months showing a healthy increase on the same period last year.\n\nThere is no information about other companies reporting strong earnings in the provided context.",
+            "grounded": true,
+            "relevant": false,
+            "useful": false,
+            "retrieved_docs": 5
+        },
+        {
+            "question": "What are the latest trends in the financial market?",
+            "answer": "Based on the provided context, here are the latest trends in the financial market:\n\n1. **Trade tensions between the US and Japan**: The US is concerned about the trade imbalance between the two countries, with Japan having a surplus of nearly 90 billion dollars. The US is urging Japan to resolve the dispute over Cable and Wireless Plc's shareholding in a new Japanese telecommunications company.\n2. **American Express' plan to sell a stake in Shearson Lehman Brothers**: American Express has agreed to sell a 13% stake in Shearson to Nippon Life Insurance Co of Japan for 530 million dollars. This is seen as a prelude to a public offering of shares in the brokerage unit.\n3. **Increased investment in the US brokerage industry by Japanese concerns**: The sale of a stake in Shearson by American Express is believed to be a sign of increased investment in the US brokerage industry by Japanese concerns.\n4. **Currency stability**: The dollar has fallen to a new record low below 140 yen, despite statements from the Group of Seven (G-7) leading industrial powers that currencies should be stabilised to underpin world trade.\n5. **Loss of credibility in world financial markets**: Four trade ministers have confessed that their governments are losing credibility in world financial markets and will not regain it until they back their promises over trade and currencies with action.\n6. **Need for coordinated policies to solve trade imbalances**: The trade ministers have agreed that trade retaliation, protectionism, and forcible export restraints are most dangerous and that the imbalances can only be solved by coordinated policies over a whole range of fiscal, monetary, trade, and industrial measures.\n\nThese are the latest trends in the financial market based on the provided context.",
+            "grounded": true,
+            "relevant": true,
+            "useful": true,
+            "retrieved_docs": 5
+        },
+        {
+            "question": "What is the impact of cryptocurrency regulation?",
+            "answer": "I do not have enough information to determine the impact of cryptocurrency regulation based on the provided context. The context only discusses monetary policy, commodity prices, trade ministers, and a potential trade deal between the U.S. and Canada, but does not mention cryptocurrency regulation.",
+            "grounded": false,
+            "relevant": false,
+            "useful": false,
+            "retrieved_docs": 5
+        },
+        {
+            "question": "How are interest rates affecting the economy?",
+            "answer": "I do not have enough information to determine how interest rates are affecting the economy based on the provided context. The text mentions interest rate swaps and interest rate futures in foreign currencies, but it does not provide any information about the current state of interest rates or their impact on the economy.",
+            "grounded": true,
+            "relevant": true,
+            "useful": false,
+            "retrieved_docs": 1
+        },
+        {
+            "question": "What are the key highlights from corporate earnings?",
+            "answer": "I do not have enough information to provide the key highlights from corporate earnings. The provided context only discusses monetary policy, trade agreements, and debt crisis strategies, but does not mention corporate earnings.",
+            "grounded": true,
+            "relevant": true,
+            "useful": false,
+            "retrieved_docs": 5
+        }
+    ]
+}
