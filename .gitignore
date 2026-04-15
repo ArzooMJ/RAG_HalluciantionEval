@@ -33,9 +33,6 @@ bm25_store/
 *.bin
 *.pkl
 
-#Eval results
-artifacts/eval/
-
 .env
 
 # Keep these
